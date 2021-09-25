@@ -2,24 +2,24 @@ package library;
 
 @SuppressWarnings("all")
 public class Books {
-
     private int id;
     private String title;
     private String author;
     private int year;
     private int pages;
 
-    public Books(int Id, String Title, String Author, int Year, int Pages){
-        this.id = Id;
-        this.title=Title;
-        this.author = Author;
-        this.year=Year;
-        this.pages=Pages;
+    public Books(int id, String title, String author, int year, int pages) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.year = year;
+        this.pages = pages;
     }
 
     public int getId() {
         return id;
     }
+
     public String getTitle() {
         return title;
     }
@@ -35,4 +35,5 @@ public class Books {
     public int getPages() {
         return pages;
     }
+
 }
