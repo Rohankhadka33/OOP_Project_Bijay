@@ -18,7 +18,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import library.Books;
 
+
 public class MainController implements Initializable {
+
 
     @FXML
     private TextField tfId;
@@ -52,34 +54,31 @@ public class MainController implements Initializable {
     @FXML
     private void handleButtonAction(ActionEvent event) {
 
+        if(event.getSource() == btnInsert){
+            insertRecord();
+        }else if (event.getSource() == btnUpdate){
+            updateRecord();
+        }else if(event.getSource() == btnDelete){
+            deleteButton();
+        }
+
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+        showBooks();
     }
 
     public Connection getConnection(){
         Connection conn;
         try{
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/yajibbb", "root","SiGMsDCr7");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/yajib", "root","SiGMsDCr7");
             return conn;
         }catch(Exception ex){
             System.out.println("Error: " + ex.getMessage());
             return null;
         }
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        showBooks();
-    }
-
-    public void showBooks(){
-        ObservableList<Books> list = getBooksList();
-
-        colId.setCellValueFactory(new PropertyValueFactory<Books, Integer>("id"));
-        colTitle.setCellValueFactory(new PropertyValueFactory<Books, String>("title"));
-        colAuthor.setCellValueFactory(new PropertyValueFactory<Books, String>("author"));
-        colYear.setCellValueFactory(new PropertyValueFactory<Books, Integer>("year"));
-        colPages.setCellValueFactory(new PropertyValueFactory<Books, Integer>("pages"));
-
-        tvBooks.setItems(list);
     }
 
     public ObservableList<Books> getBooksList(){
@@ -104,6 +103,35 @@ public class MainController implements Initializable {
         return bookList;
     }
 
+    public void showBooks(){
+        ObservableList<Books> list = getBooksList();
+
+        colId.setCellValueFactory(new PropertyValueFactory<Books, Integer>("id"));
+        colTitle.setCellValueFactory(new PropertyValueFactory<Books, String>("title"));
+        colAuthor.setCellValueFactory(new PropertyValueFactory<Books, String>("author"));
+        colYear.setCellValueFactory(new PropertyValueFactory<Books, Integer>("year"));
+        colPages.setCellValueFactory(new PropertyValueFactory<Books, Integer>("pages"));
+
+        tvBooks.setItems(list);
+    }
+    private void insertRecord(){
+        String query = "INSERT INTO books VALUES (" + tfId.getText() + ",'" + tfTitle.getText() + "','" + tfAuthor.getText() + "',"
+                + tfYear.getText() + "," + tfPages.getText() + ")";
+        executeQuery(query);
+        showBooks();
+    }
+    private void updateRecord(){
+        String query = "UPDATE  books SET title  = '" + tfTitle.getText() + "', author = '" + tfAuthor.getText() + "', year = " +
+                tfYear.getText() + ", pages = " + tfPages.getText() + " WHERE id = " + tfId.getText() + "";
+        executeQuery(query);
+        showBooks();
+    }
+    private void deleteButton(){
+        String query = "DELETE FROM books WHERE id =" + tfId.getText() + "";
+        executeQuery(query);
+        showBooks();
+    }
+
     private void executeQuery(String query) {
         Connection conn = getConnection();
         Statement st;
@@ -114,5 +142,6 @@ public class MainController implements Initializable {
             ex.printStackTrace();
         }
     }
+
 
 }
