@@ -71,7 +71,15 @@ public class MainController implements Initializable {
     }
 
     public void showBooks(){
+        ObservableList<Books> list = getBooksList();
 
+        colId.setCellValueFactory(new PropertyValueFactory<Books, Integer>("id"));
+        colTitle.setCellValueFactory(new PropertyValueFactory<Books, String>("title"));
+        colAuthor.setCellValueFactory(new PropertyValueFactory<Books, String>("author"));
+        colYear.setCellValueFactory(new PropertyValueFactory<Books, Integer>("year"));
+        colPages.setCellValueFactory(new PropertyValueFactory<Books, Integer>("pages"));
+
+        tvBooks.setItems(list);
     }
 
     public ObservableList<Books> getBooksList(){
@@ -95,4 +103,6 @@ public class MainController implements Initializable {
         }
         return bookList;
     }
+
+
 }
