@@ -16,7 +16,7 @@
    <children>
       <VBox layoutX="5.0" layoutY="161.0" prefHeight="400.0" prefWidth="124.0" spacing="15.0">
          <children>
-            <Label lineSpacing="20.0" prefHeight="68.0" prefWidth="131.0" text="ID">
+            <Label lineSpacing="20.0" prefHeight="68.0" prefWidth="133.0" text="ID">
                <font>
                   <Font name="Futura Medium" size="24.0" />
                </font>
@@ -80,34 +80,34 @@
       </VBox>
       <VBox layoutX="130.0" layoutY="161.0" prefHeight="400.0" prefWidth="258.0" spacing="10.0">
          <children>
-            <TextField fx:id="tfId" prefHeight="75.0" prefWidth="220.0">
+            <TextField fx:id="tfId" prefHeight="75.0" prefWidth="220.0" style="-fx-background-color: #FFFFFF#FFFFFF;">
                <font>
                   <Font name="Impact" size="22.0" />
                </font>
             </TextField>
-            <TextField fx:id="tfTitle" prefHeight="75.0" prefWidth="220.0">
+            <TextField fx:id="tfTitle" prefHeight="75.0" prefWidth="220.0" style="-fx-background-color: #FFFFFF#FFFFFF;">
                <font>
                   <Font name="Impact" size="22.0" />
                </font>
             </TextField>
-            <TextField fx:id="tfAuthor" layoutX="10.0" layoutY="10.0" prefHeight="75.0" prefWidth="220.0">
+            <TextField fx:id="tfAuthor" layoutX="10.0" layoutY="10.0" prefHeight="75.0" prefWidth="220.0" style="-fx-background-color: #FFFFFF#FFFFFF;">
                <font>
                   <Font name="Impact" size="22.0" />
                </font>
             </TextField>
-            <TextField fx:id="tfYear" layoutX="10.0" layoutY="35.0" prefHeight="75.0" prefWidth="220.0">
+            <TextField fx:id="tfYear" layoutX="10.0" layoutY="35.0" prefHeight="75.0" prefWidth="220.0" style="-fx-background-color: #FFFFFF#FFFFFF;">
                <font>
                   <Font name="Impact" size="22.0" />
                </font>
             </TextField>
-            <TextField fx:id="tfPages" layoutX="10.0" layoutY="85.0" prefHeight="75.0" prefWidth="220.0">
+            <TextField fx:id="tfPages" layoutX="10.0" layoutY="85.0" prefHeight="75.0" prefWidth="220.0" style="-fx-background-color: #FFFFFF#FFFFFF;">
                <font>
                   <Font name="Impact" size="22.0" />
                </font>
             </TextField>
          </children>
       </VBox>
-      <TableView fx:id="tvBooks" layoutX="398.0" layoutY="1.0" prefHeight="779.0" prefWidth="660.0" style="-fx-background-color: #5F9EA0#5F9EA0;">
+      <TableView fx:id="tvBooks" layoutX="398.0" layoutY="-3.0" prefHeight="783.0" prefWidth="666.0" style="-fx-background-color: #5F9EA0#5F9EA0;">
         <columns>
           <TableColumn fx:id="colId" prefWidth="60.0" text="ID" />
           <TableColumn fx:id="colTitle" prefWidth="200.0" text="Title" />
@@ -116,7 +116,7 @@
             <TableColumn fx:id="colPages" prefWidth="100.0" text="Pages" />
         </columns>
       </TableView>
-      <Button fx:id="btnInsert" alignment="BOTTOM_LEFT" layoutY="585.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="69.0" prefWidth="398.0" style="-fx-background-color: #008080#008080;" text="     Insert" textFill="WHITE">
+      <Button fx:id="btnInsert" alignment="BOTTOM_LEFT" layoutX="-5.0" layoutY="585.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="69.0" prefWidth="403.0" style="-fx-background-color: #008080#008080;" text="     Insert" textFill="WHITE">
          <font>
             <Font name="Impact" size="32.0" />
          </font>
@@ -127,7 +127,7 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <Button fx:id="btnUpdate" alignment="BOTTOM_LEFT" layoutX="-3.0" layoutY="648.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="64.0" prefWidth="401.0" style="-fx-background-color: #045F5F#045F5F;" text="     Update" textFill="WHITE">
+      <Button fx:id="btnUpdate" alignment="BOTTOM_LEFT" layoutX="-7.0" layoutY="648.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="64.0" prefWidth="405.0" style="-fx-background-color: #045F5F#045F5F;" text="     Update" textFill="WHITE">
          <font>
             <Font name="Impact" size="32.0" />
          </font>
@@ -138,7 +138,7 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <Button fx:id="btnDelete" alignment="BOTTOM_LEFT" layoutX="-3.0" layoutY="711.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="69.0" prefWidth="401.0" style="-fx-background-color: #033E3E#033E3E;" text="     Delete" textFill="WHITE">
+      <Button fx:id="btnDelete" alignment="BOTTOM_LEFT" layoutX="-7.0" layoutY="711.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="69.0" prefWidth="405.0" style="-fx-background-color: #033E3E#033E3E;" text="     Delete" textFill="WHITE">
          <font>
             <Font name="Impact" size="32.0" />
          </font>
@@ -149,7 +149,7 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <ImageView fitHeight="153.0" fitWidth="398.0" layoutX="-3.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="153.0" fitWidth="400.0" layoutX="-7.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../resources/BOOKTAGGER.png" />
          </image>
