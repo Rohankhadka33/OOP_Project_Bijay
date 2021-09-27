@@ -104,5 +104,15 @@ public class MainController implements Initializable {
         return bookList;
     }
 
+    private void executeQuery(String query) {
+        Connection conn = getConnection();
+        Statement st;
+        try{
+            st = conn.createStatement();
+            st.executeUpdate(query);
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
 
 }
