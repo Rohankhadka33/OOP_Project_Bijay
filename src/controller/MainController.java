@@ -49,6 +49,22 @@ public class MainController implements Initializable {
     @FXML
     private Button btnDelete;
 
+    @FXML
+    private void handleButtonAction(ActionEvent event) {
+
+    }
+
+    public Connection getConnection(){
+        Connection conn;
+        try{
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/yajibbb", "root","SiGMsDCr7");
+            return conn;
+        }catch(Exception ex){
+            System.out.println("Error: " + ex.getMessage());
+            return null;
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         showBooks();
