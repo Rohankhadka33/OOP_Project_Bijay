@@ -116,7 +116,7 @@
             <TableColumn fx:id="colPages" prefWidth="100.0" text="Pages" />
         </columns>
       </TableView>
-      <Button fx:id="btnInsert" alignment="BOTTOM_LEFT" layoutX="-5.0" layoutY="585.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="69.0" prefWidth="403.0" style="-fx-background-color: #008080#008080;" text="     Insert" textFill="WHITE">
+      <Button fx:id="btnInsert" alignment="BOTTOM_LEFT" layoutX="-5.0" layoutY="585.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#handleButtonAction" prefHeight="69.0" prefWidth="403.0" style="-fx-background-color: #008080#008080;" text="     Insert" textFill="WHITE">
          <font>
             <Font name="Impact" size="32.0" />
          </font>
@@ -127,7 +127,7 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <Button fx:id="btnUpdate" alignment="BOTTOM_LEFT" layoutX="-7.0" layoutY="648.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="64.0" prefWidth="405.0" style="-fx-background-color: #045F5F#045F5F;" text="     Update" textFill="WHITE">
+      <Button fx:id="btnUpdate" alignment="BOTTOM_LEFT" layoutX="-7.0" layoutY="648.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#handleButtonAction" prefHeight="64.0" prefWidth="405.0" style="-fx-background-color: #045F5F#045F5F;" text="     Update" textFill="WHITE">
          <font>
             <Font name="Impact" size="32.0" />
          </font>
@@ -138,7 +138,7 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <Button fx:id="btnDelete" alignment="BOTTOM_LEFT" layoutX="-7.0" layoutY="711.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="69.0" prefWidth="405.0" style="-fx-background-color: #033E3E#033E3E;" text="     Delete" textFill="WHITE">
+      <Button fx:id="btnDelete" alignment="BOTTOM_LEFT" layoutX="-7.0" layoutY="711.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#handleButtonAction" prefHeight="69.0" prefWidth="405.0" style="-fx-background-color: #033E3E#033E3E;" text="     Delete" textFill="WHITE">
          <font>
             <Font name="Impact" size="32.0" />
          </font>
