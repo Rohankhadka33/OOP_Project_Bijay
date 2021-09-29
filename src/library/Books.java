@@ -1,6 +1,8 @@
 package library;
 
 @SuppressWarnings("all")
+
+// CREATING Books CLASS TO STORE ATTRIBUTES WE NEED.
 public class Books {
     private int id;
     private String title;
@@ -8,6 +10,7 @@ public class Books {
     private int year;
     private int pages;
 
+    // CONSTRUCTOR FOR OUR Books CLASS.
     public Books(int id, String title, String author, int year, int pages) {
         this.id = id;
         this.title = title;
@@ -16,6 +19,7 @@ public class Books {
         this.pages = pages;
     }
 
+    // GETTER METHODS FOR OUR BOOKS CLASS.
     public int getId() {
         return id;
     }

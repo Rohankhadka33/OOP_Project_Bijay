@@ -1,5 +1,6 @@
 package controller;
 
+
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
@@ -18,7 +19,8 @@ import library.Books;
 
 public class MainController implements Initializable {
 
-
+    /* TEXT FIELDS, TABLE VIEW WITH TABLE COLUMNS, AND BUTTONS INTEGRATED FROM SCENE BUILDER
+    WITH THEIR FX:IDS AND FUNCTIONS */
     @FXML
     private TextField tfId;
     @FXML
@@ -49,7 +51,7 @@ public class MainController implements Initializable {
     private Button btnDelete;
 
     @FXML
-    private void handleButtonAction(ActionEvent event) {
+    private void handleButtonAction(ActionEvent event) { // ASSIGNS BEHAVIOR TO BUTTONS ON THE UI.
 
         if(event.getSource() == btnInsert){
             insertRecord();
@@ -61,11 +63,15 @@ public class MainController implements Initializable {
 
     }
 
+
     @Override
+    // INITIALIZE INTERFACE ALLOWS TO INTERACT WITH VARIABLES INJECTED WITH @FXML.
     public void initialize(URL url, ResourceBundle rb) {
-        showBooks();
+        showBooks(); /*EVERYTIME THE PROGRAM RUNS, IT WILL SHOW THE LIST OF BOOKS AS RETURNED BY
+        showBooks METHOD*/
     }
 
+    // CREATING METHOD getConnection TO CONNECT AND ACCESS DATABASE EVERYTIME.
     public Connection getConnection(){
         Connection conn;
         try{
@@ -77,39 +83,62 @@ public class MainController implements Initializable {
         }
     }
 
+    /* CREATING METHOD getBooksList WITH ObservableList TO FETCH THE RECORDS FROM THE DATABASE.
+    ObservableList ALLOWS listener TO TRACK CHANGES.*/
     public ObservableList<Books> getBooksList(){
+        // RETURNS booklist WITH ALL FETCHED RECORDS.
         ObservableList<Books> bookList = FXCollections.observableArrayList();
         Connection conn = getConnection();
         String query = "SELECT * FROM books";
-        Statement statement;
-        ResultSet resultSet;
+        Statement statement; // statement NOW PROVIDES INTERFACE AND FEW METHODS THROUGH WHICH WE CAN SUBMIT SQL QUERIES.
+        ResultSet resultSet; // resultSet NOW REPRESENTS A TABLE OF DATA FETCHED FROM OUR DATABASE AS EXECUTED THROUGH QUERY.
 
         try{
-            statement = conn.createStatement();
-            resultSet = statement.executeQuery(query);
+            statement = conn.createStatement(); // IMPLEMENTING STATEMENT statement.
+            resultSet = statement.executeQuery(query); // EXECUTING query STATEMENT WE SPECIFIED ABOVE and FETCHING DATA IN resultSet.
             Books books;
+
+            // ITERATING THE ResultSet resultSet or WHILE THE ResultSet resultSet HAS ELEMENTS OR DATA.
             while(resultSet.next()){
-                books = new Books(resultSet.getInt("id"), resultSet.getString("title"), resultSet.getString("author"), resultSet.getInt("year"),resultSet.getInt("pages"));
-                bookList.add(books);
+
+                // CREATING NEW INSTANCE OF books THROUGH BOOKS CONSTRUCTOR.
+                books = new Books(resultSet.getInt("id"), resultSet.getString("title"),
+                        resultSet.getString("author"), resultSet.getInt("year"),
+                        resultSet.getInt("pages")); // id,title,author,year AND pages HERE PRETENDS TO BE COLUMNS IN OUR DATABASE.
+
+                bookList.add(books); //ADDING FETCHED DATA INTO bookList
             }
 
         }catch(Exception ex){
             ex.printStackTrace();
         }
-        return bookList;
+        return bookList; // RETURNS THE LIST OF BOOKS FETCHED FROM DATABASE BY THE getBooksList METHOD.
     }
 
+    // CREATING METHOD TO DISPLAY ALL DATA IN TABLEVIEW.
     public void showBooks(){
         ObservableList<Books> list = getBooksList();
 
+        // ASSIGNS DATA STORED UNDER id IN DATABASE RETURNED BY getBooksList() IN COLUMN WHOSE fx:id IS SET "colId"
         colId.setCellValueFactory(new PropertyValueFactory<Books, Integer>("id"));
+
+        // ASSIGNS DATA STORED UNDER title IN DATABASE RETURNED BY getBooksList() IN COLUMN WHOSE fx:id IS SET "colTitle"
         colTitle.setCellValueFactory(new PropertyValueFactory<Books, String>("title"));
+
+        // ASSIGNS DATA STORED UNDER author IN DATABASE RETURNED BY getBooksList() IN COLUMN WHOSE fx:id IS SET "colAuthor"
         colAuthor.setCellValueFactory(new PropertyValueFactory<Books, String>("author"));
+
+        // ASSIGNS DATA STORED UNDER year IN DATABASE RETURNED BY getBooksList() IN COLUMN WHOSE fx:id IS SET "colYear"
         colYear.setCellValueFactory(new PropertyValueFactory<Books, Integer>("year"));
+
+        // ASSIGNS DATA STORED UNDER pages IN DATABASE RETURNED BY getBooksList() IN COLUMN WHOSE fx:id IS SET "colPages"
         colPages.setCellValueFactory(new PropertyValueFactory<Books, Integer>("pages"));
 
+        // SHOWS ALL THE ABOVE DATA IN TABLEVIEW
         tvBooks.setItems(list);
     }
+
+    // CREATING METHOD TO INSERT DATA
     private void insertRecord(){
         Connection connection = getConnection();
         PreparedStatement stmt;
@@ -130,6 +159,7 @@ public class MainController implements Initializable {
         showBooks();
     }
 
+    // CREATING METHOD TO DELETE DATA
     private void deleteRecord() {
         Connection connection = getConnection();
         PreparedStatement stmt;
@@ -146,6 +176,7 @@ public class MainController implements Initializable {
         showBooks();
     }
 
+    // CREATING METHOD TO UPDATE DATA
     private void updateRecord() {
         Connection connection = getConnection();
         PreparedStatement stmt;
