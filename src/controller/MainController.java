@@ -17,7 +17,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import library.Books;
 
 
-public class MainController implements Initializable {
+public class MainController implements Initializable { /*ALLOWS AUTOMATIC INJECTION OF LOCATION AND RESOURCES
+    PROPERTIES INTO THE CONTROLLER.  FXMLLoader will now automatically call any suitably annotated
+    no-arg initialize() method defined by the controller. */
 
     /* TEXT FIELDS, TABLE VIEW WITH TABLE COLUMNS, AND BUTTONS INTEGRATED FROM SCENE BUILDER
     WITH THEIR FX:IDS AND FUNCTIONS */
