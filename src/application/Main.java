@@ -9,18 +9,20 @@ import javafx.stage.Stage;
 import java.util.Objects;
 
 public class Main extends Application {
+
     @Override
     public void start(Stage stage) throws Exception {
-        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(
-                "/view/MainPanel.fxml")));
-        Scene scene = new Scene(parent);
-        stage.setScene(scene);
-        stage.setTitle("Library");
-        stage.show();
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/MainPanel.fxml")));
 
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
     }
+
 
     public static void main(String[] args) {
         launch(args);
     }
+
 }
