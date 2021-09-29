@@ -1,10 +1,7 @@
 package controller;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -59,14 +56,13 @@ public class MainController implements Initializable {
         }else if (event.getSource() == btnUpdate){
             updateRecord();
         }else if(event.getSource() == btnDelete){
-            deleteButton();
+            deleteRecord();
         }
 
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
         showBooks();
     }
 
@@ -85,15 +81,15 @@ public class MainController implements Initializable {
         ObservableList<Books> bookList = FXCollections.observableArrayList();
         Connection conn = getConnection();
         String query = "SELECT * FROM books";
-        Statement st;
-        ResultSet rs;
+        Statement statement;
+        ResultSet resultSet;
 
         try{
-            st = conn.createStatement();
-            rs = st.executeQuery(query);
+            statement = conn.createStatement();
+            resultSet = statement.executeQuery(query);
             Books books;
-            while(rs.next()){
-                books = new Books(rs.getInt("id"), rs.getString("title"), rs.getString("author"), rs.getInt("year"),rs.getInt("pages"));
+            while(resultSet.next()){
+                books = new Books(resultSet.getInt("id"), resultSet.getString("title"), resultSet.getString("author"), resultSet.getInt("year"),resultSet.getInt("pages"));
                 bookList.add(books);
             }
 
@@ -115,32 +111,61 @@ public class MainController implements Initializable {
         tvBooks.setItems(list);
     }
     private void insertRecord(){
-        String query = "INSERT INTO books VALUES (" + tfId.getText() + ",'" + tfTitle.getText() + "','" + tfAuthor.getText() + "',"
-                + tfYear.getText() + "," + tfPages.getText() + ")";
-        executeQuery(query);
-        showBooks();
-    }
-    private void updateRecord(){
-        String query = "UPDATE  books SET title  = '" + tfTitle.getText() + "', author = '" + tfAuthor.getText() + "', year = " +
-                tfYear.getText() + ", pages = " + tfPages.getText() + " WHERE id = " + tfId.getText() + "";
-        executeQuery(query);
-        showBooks();
-    }
-    private void deleteButton(){
-        String query = "DELETE FROM books WHERE id =" + tfId.getText() + "";
-        executeQuery(query);
+        Connection connection = getConnection();
+        PreparedStatement stmt;
+        try{
+            stmt = connection.prepareStatement("INSERT INTO books VALUES(?,?,?,?,?)");
+            stmt.setInt(1, Integer.parseInt(tfId.getText()));
+            stmt.setString(2, tfTitle.getText());
+            stmt.setString(3, tfAuthor.getText());
+            stmt.setInt(4, Integer.parseInt(tfYear.getText()));
+            stmt.setInt(5, Integer.parseInt(tfPages.getText()));
+            int i = stmt.executeUpdate();
+            System.out.println(i);
+            connection.close();
+
+        }catch (Exception e){
+            System.out.println();
+        }
         showBooks();
     }
 
-    private void executeQuery(String query) {
-        Connection conn = getConnection();
-        Statement st;
-        try{
-            st = conn.createStatement();
-            st.executeUpdate(query);
-        }catch(Exception ex){
-            ex.printStackTrace();
+    private void deleteRecord() {
+        Connection connection = getConnection();
+        PreparedStatement stmt;
+
+        try {
+            stmt=connection.prepareStatement("delete from books where id=?");
+            stmt.setInt(1,Integer.parseInt(tfId.getText()));
+
+            int i=stmt.executeUpdate();
+            System.out.println(i+" records deleted");
+        }catch (Exception e){
+            System.out.println();
         }
+        showBooks();
+    }
+
+    private void updateRecord() {
+        Connection connection = getConnection();
+        PreparedStatement stmt;
+
+        try {
+            stmt = connection.prepareStatement("UPDATE books SET title=?, author=?, year=?, pages=? WHERE id=?");
+            ((PreparedStatement) stmt).setInt(5, Integer.parseInt(tfId.getText()));
+            stmt.setString(1, tfTitle.getText());
+            stmt.setString(2, tfAuthor.getText());
+            stmt.setInt(3, Integer.parseInt(tfYear.getText()));
+            stmt.setInt(4, Integer.parseInt(tfPages.getText()));
+            int i = stmt.executeUpdate();
+
+            System.out.println(i);
+            connection.close();
+
+        }catch (Exception e){
+            System.out.println();
+        }
+        showBooks();
     }
 
 
